@@ -15,17 +15,18 @@ public class ObstacleController : MonoBehaviour
     private void Start()
     {
         currentHealth = obstacleHealth;
+        obstacle_health.SetObstacleHealth(currentHealth);
     }
 
     private void Update()
     {
         if (currentHealth <= 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "player")
         {

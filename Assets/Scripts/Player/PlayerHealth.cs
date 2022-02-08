@@ -16,16 +16,28 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "PickUp")
         {
-            TakeDamage(1);
-        }
-        else if (collision.gameObject.tag == "PickUp")
-        {
-            if (currentHealth <= 50)
+            if (currentHealth < 50)
             {
                 GainHealth(8);
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentHealth == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            TakeDamage(1);
         }
     }
 
